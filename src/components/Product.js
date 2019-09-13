@@ -6,9 +6,16 @@ class Product extends Component {
     }
 
     render() {
+        const {product} = this.props;
         return (
-            <div>
-                
+            <div className="productBox">
+                <div className="productImg">
+                <img src={product.img} alt="product picture" height="100px"/>
+                </div>
+                <div className="infoSection">
+                    <p>{product.name}</p>
+                    <p>{`$${product.price}`}</p>
+                </div>
             </div>
         )
     }

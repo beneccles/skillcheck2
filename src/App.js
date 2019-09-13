@@ -3,7 +3,6 @@ import axios from 'axios';
 import Header from './components/Header';
 import Form from './components/Form';
 import Dashboard from './components/Dashboard';
-import Product from './components/Product';
 import './App.css';
 
 class App extends Component {
@@ -25,7 +24,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <div className="bodySection">
+        <Dashboard inventory={this.state.inventory} />
         <Form />
+        </div>
       </div>
     );
   }
