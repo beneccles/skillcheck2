@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Form extends Component {
     constructor() {
@@ -40,6 +41,7 @@ class Form extends Component {
             fieldPrice.value = 0;
         }
 
+        // Clear Form's state to finish the job.
         this.setState({
             name: "",
             price: 0,
@@ -47,8 +49,11 @@ class Form extends Component {
         })
     }
 
-    postToDB() {
-
+    postToDB(product) {
+        axios.post('/api/product', product).then(res => {
+            this.clearInput()
+            this.props.refreshInventory()
+        })
     }
 
     render() {
@@ -67,7 +72,7 @@ class Form extends Component {
                 </div>
                 <div id="buttons">
                     <button onClick={() => this.clearInput()}>Cancel</button>
-                    <button>Add to Inventory</button>
+                    <button onClick={() => this.postToDB(this.state)}>Add to Inventory</button>
                 </div>
             </div>
         )

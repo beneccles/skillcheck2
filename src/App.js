@@ -14,11 +14,17 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
+  getInventory(){
     axios.get('/api/inventory').then((inventory) => {
       this.setState({inventory: inventory.data})
     })
   }
+
+  componentDidMount(){
+    this.getInventory()
+  }
+
+  formDidChange
 
   render() {
     return (
@@ -26,7 +32,7 @@ class App extends Component {
         <Header />
         <div className="bodySection">
         <Dashboard inventory={this.state.inventory} />
-        <Form />
+        <Form refreshInventory={() => this.getInventory()}/>
         </div>
       </div>
     );
