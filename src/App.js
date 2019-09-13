@@ -15,6 +15,13 @@ class App extends Component {
     }
   }
 
+  componentDidMount(){
+    axios.get('/api/inventory').then((inventory) => {
+      this.setState({inventory: inventory.data})
+      console.log(this.state.inventory)
+    })
+  }
+  
   render() {
     return (
       <div className="App">

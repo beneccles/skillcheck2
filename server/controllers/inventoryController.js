@@ -1,7 +1,7 @@
 module.exports = {
     getInventory: (req, res) => {
         const db = req.app.get('db')
-        db.read_products().then(products => res.status.send(products))
+        db.read_products().then(products => res.status(200).send(products))
         // Return all products to the origin of the .GET call.
     },
     addProduct: (req, res) => {
