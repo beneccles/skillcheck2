@@ -33,7 +33,7 @@ class App extends Component {
 
   editProduct(id, name, price, img){
     this.setState({id: id, name: name, price: price, img: img})
-    console.log(this.state)
+    console.log(this.state.editItem)
   }
 
   putProduct(product) {
