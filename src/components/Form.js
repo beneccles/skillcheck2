@@ -60,7 +60,7 @@ class Form extends Component {
         return (
             <div className="newProductBox">
                 <div id="displayImg">
-
+                    <img src={this.state.imgurl} alt="previewPicture" />
                 </div>
                 <div id="newProductInput">
                     <p>Image URL:</p>
@@ -71,8 +71,8 @@ class Form extends Component {
                     <input ref="fieldPrice" value={this.state.price} onChange={e => this.handlePrice(e.target.value)} type="number" />
                 </div>
                 <div id="buttons">
-                    <button onClick={() => this.clearInput()}>Cancel</button>
-                    <button onClick={() => this.postToDB(this.state)}>Add to Inventory</button>
+                    <button className="editBoxButton" onClick={() => this.clearInput()}>Cancel</button>
+                    <button className="editBoxButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>
                 </div>
             </div>
         )

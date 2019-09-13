@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
 /* HEADER */
 header {
   height: 5vh;
@@ -22,7 +28,6 @@ header {
 .App {
   height: 95vh;
   width: 100vw;
-  background-color: blue;
 }
 
 .bodySection {
@@ -41,6 +46,7 @@ header {
   margin-top: 20px;
   margin-left: 20px;
   border: solid 1px black;
+  background-color: #D34735;
   width: 100%;
   height: 150px;
   display: flex;
@@ -55,6 +61,7 @@ header {
   margin-left: 20px;
 }
 .infoSection {
+  background-color: #D34735;
   line-height: 0px;
   margin-left: 20px;
   display: flex;
@@ -67,5 +74,40 @@ header {
 
 /*************/
 /*************/
+/* EDIT BOX */
+.editBoxButton {
+  background-color: #ED6B5A;
+  border-radius: 5px;
+  height: 2rem;
+}
+
+.newProductBox{
+  margin-top: 20px;
+  background-color: #3AD886;
+  height: 500px;
+  width: 500px;
+
+}
+
+.displayImg {
+  height: 300px;
+  width: 100px;
+  border: solid 1px black;
+}
+
+.productButtons{
+  margin-top: 10px;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+}
+
+#edit {
+  margin-left: 20px;
+}
+/************/
 
 /********/

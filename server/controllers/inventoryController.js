@@ -17,8 +17,8 @@ module.exports = {
     },
     editProduct: (req, res) => {
         const db = req.app.get('db')
-        const {name, price, img} = req.query
-        const {id} = req.params
+        const {id, name, price, img} = req.body
+        console.log(req.body)
 
         // Pass in the ID and description to update_product, so that it can update the server.
         db.update_product(id, name, price, img).then(result => {

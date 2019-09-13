@@ -10,7 +10,13 @@ class App extends Component {
     super()
 
     this.state = {
-      inventory: []
+      inventory: [],
+      editItem: {
+        id: 0,
+        name: "",
+        price: 0,
+        img: ""
+      }
     }
   }
 
@@ -20,19 +26,38 @@ class App extends Component {
     })
   }
 
+  // Run GET as soon as APP loads.
   componentDidMount(){
     this.getInventory()
   }
 
-  formDidChange
+  editProduct(id, name, price, img){
+    this.setState({id: id, name: name, price: price, img: img})
+    console.log(this.state)
+  }
+
+  putProduct(product) {
+    axios({
+      method: 'post',
+      url: '/api/product',
+      data: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        img: product.img
+      }
+    }).then((response) => {console.log(response)}).catch((error) => {
+      console.log(error)
+    })
+  }
 
   render() {
     return (
       <div className="App">
         <Header />
         <div className="bodySection">
-        <Dashboard inventory={this.state.inventory} />
-        <Form refreshInventory={() => this.getInventory()}/>
+        <Dashboard refresh={() => this.getInventory()} edit={() => this.editProduct()}inventory={this.state.inventory} />
+        <Form editItem={this.editItem} refreshInventory={() => this.getInventory()}/>
         </div>
       </div>
     );
