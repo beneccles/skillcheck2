@@ -5,27 +5,23 @@ import axios from 'axios';
 class Dashboard extends Component {
     constructor(props) {
         super(props)
+        this.renderProducts = this.renderProducts.bind(this)
     }
-
-   
 
     renderProducts() {
         const { inventory } = this.props;
-        return inventory.map((product, index) => {
+        console.log(typeof inventory.id)
+        let result = inventory.map((product) => {
             return (
-                <Product key={product.id} refresh={() => this.props.refresh()} edit={() => this.props.edit()} product={product} />
+                <Product key={product.id} editProduct={() => this.props.editProduct} product={product} />
             )
         })
+
+        return result
     }
 
-
-
     render() {
-        return (
-            <div>
-                {this.renderProducts()}
-            </div>
-        )
+        return this.renderProducts()
     }
 }
 
