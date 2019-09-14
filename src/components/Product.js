@@ -36,8 +36,10 @@ import axios from 'axios';
 // export default Product
 
 export default function Product(props) {
-    let {id, name, price, img} = this.props.product;
+    let {id, name, price, img} = props.product;
     return (
+        // Since props is defined within the function, we can drop "this."
+        // This has no context within this function.
         <div className="productBox">
             <div className="productImg" style={{ backgroundImage: `url(${img})`}}>
             <img src={img} alt="product picture" height="100px"/>
@@ -47,7 +49,7 @@ export default function Product(props) {
                 <p>{`$${price}`}</p>
                 <div className="productButtons">
                     {/* <button onClick={() => this.deleteProduct(this.state.id)} id="delete">Delete</button> */}
-                    <button onClick={_ => this.props.editProduct(this.props.product)} id="edit">Edit</button>
+                    <button onClick={_ => props.editProduct(props.product)} id="edit">Edit</button>
                 </div>
             </div>
         </div>

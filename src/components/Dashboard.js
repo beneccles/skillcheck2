@@ -10,7 +10,6 @@ class Dashboard extends Component {
 
     renderProducts() {
         const { inventory } = this.props;
-        console.log(typeof inventory.id)
         let result = inventory.map((product) => {
             return (
                 <Product key={product.id} editProduct={() => this.props.editProduct} product={product} />
