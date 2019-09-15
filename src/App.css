@@ -35,7 +35,7 @@ header {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-around;
-	align-items: flex-start;
+	align-items: center;
 	align-content: stretch;
 }
 
@@ -81,17 +81,42 @@ header {
   height: 2rem;
 }
 
+#secondButton {
+  margin-left: 20px;
+}
+
 .newProductBox{
   margin-top: 20px;
   background-color: #3AD886;
-  height: 500px;
-  width: 500px;
+  border-radius: 10px;
+  min-height: 520px;
+  min-width: 450px;
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
 
 }
 
-.displayImg {
-  height: 300px;
-  width: 100px;
+#newProductInput {
+  display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+  align-content: stretch;
+  width: 200px;
+}
+
+#displayImg {
+  margin-top: 20px;
+  height: 200px;
+  width: 320px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  object-fit: scale-down;
   border: solid 1px black;
 }
 
@@ -107,6 +132,16 @@ header {
 
 #edit {
   margin-left: 20px;
+}
+
+#buttons {
+  margin-top: 10px;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
 }
 /************/
 

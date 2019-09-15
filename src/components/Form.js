@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import noImage from '../assets/noimage.jpg';
 
 class Form extends Component {
     constructor() {
@@ -47,7 +48,7 @@ class Form extends Component {
             id: null,
             name: "",
             price: 0,
-            imgurl: ""
+            imgurl: "https://www.nintendo.com/content/dam/noa/en_US/hardware/switch/nintendo-switch-new-package/gallery/bundle_color_console%20(3).jpg"
         })
     }
 
@@ -94,12 +95,12 @@ class Form extends Component {
                 <div id="displayImg" style={{ backgroundImage: `url('${this.state.imgurl}')`}}>
                     {/* <img src={this.state.imgurl} alt="previewPicture" /> */}
                 </div> :
-                <div id="displayImg">
+                <div id="displayImg" style={{ backgroundImage: `url('${noImage})` }}>
 
                 </div>}
                 <div id="newProductInput">
                     <p>Image URL:</p>
-                    <input ref="fieldURL" value={this.state.imgurl} onChange={e => this.handleURL(e.target.value)} type="text" />
+                    <input ref="fieldURL"  value={this.state.imgurl} onChange={e => this.handleURL(e.target.value)} type="text" />
                     <p>Product Name:</p>
                     <input ref="fieldName" value={this.state.name} onChange={e => this.handleName(e.target.value)} type="text" />
                     <p>Price:</p>
@@ -108,8 +109,8 @@ class Form extends Component {
                 <div id="buttons">
                     {/* Change the buttons based on whether we are adding a new product, or editting an old one. */}
                     <button className="editBoxButton" onClick={() => this.clearInput()}>Cancel</button>
-                    { this.state.edit ? <button className="editBoxButton" onClick={() => this.editToDB(this.state)}>Save Changes</button> :
-                    <button className="editBoxButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>}
+                    { this.state.edit ? <button className="editBoxButton" id="secondButton" onClick={() => this.editToDB(this.state)}>Save Changes</button> :
+                    <button className="editBoxButton" id="secondButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>}
                 </div>
             </div>
         )
