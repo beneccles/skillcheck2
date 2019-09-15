@@ -42,5 +42,16 @@ module.exports = {
         })
 
 
+    },
+    getOne: (req, res) => {
+        const db = req.app.get('db')
+        const {id} = req.params
+
+        db.get_product([id]).then(result => {
+            res.status(200).send(result)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send({errorMessage: 'Something Went Wrong! Our Engineers have been notified.'})
+        })
     }
 }

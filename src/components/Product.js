@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+import noimage from '../assets/noimage.jpg'
 
 // class Product extends Component {
 //     constructor(props) {
@@ -41,8 +43,10 @@ export default function Product(props) {
         // Since props is defined within the function, we can drop "this."
         // This has no context within this function.
         <div className="productBox">
-            <div className="productImg" style={{ backgroundImage: `url(${img})`}}>
-            <img src={img} alt="product picture" height="100px"/>
+            <div className="productImg">
+            {img ? <img src={img} alt="product picture" height="100px"/> :
+            <img src={noimage} alt="no picture found" height="100px" width="150.13px"/>}
+            
             </div>
             <div className="infoSection">
                 <p>{name}</p>
@@ -51,7 +55,7 @@ export default function Product(props) {
                     <button onClick={() => props.delete(id)} id="delete">Delete</button>
                     {/* onClick always looks for a callback function */}
                     {/* Give onClick a grenade it can pull the pin out of. */}
-                    <button onClick={() => props.editProduct(props.product)} id="edit">Edit</button>
+                    <Link to={`/edit/${id}`} state={props.product}><button id="edit">Edit</button></Link>
                 </div>
             </div>
         </div>

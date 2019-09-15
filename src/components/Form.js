@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import noImage from '../assets/noimage.jpg';
+import { withRouter } from 'react-router-dom';
 
 class Form extends Component {
     constructor() {
@@ -27,64 +28,83 @@ class Form extends Component {
     }
 
     clearInput() {
-        let { fieldURL, fieldName, fieldPrice } = this.refs;
+        // let { fieldURL, fieldName, fieldPrice } = this.refs;
 
         // If there is something there to remove, remove it.
         // Otherwise, we can leave that field alone.
-        if (fieldURL.value) {
-            fieldURL.value = "";
-        }
 
-        if (fieldName.value) {
-            fieldName.value = "";
-        }
+        if (this.state.id) {
+            this.props.history.push('/');
+        } else {
+            // if (fieldURL.value) {
+            //     fieldURL.value = "";
+            // }
 
-        if (fieldPrice.value) {
-            fieldPrice.value = 0;
-        }
+            // if (fieldName.value) {
+            //     fieldName.value = "";
+            // }
 
-        // Clear Form's state to finish the job.
-        this.setState({
-            id: null,
-            name: "",
-            price: 0,
-            imgurl: "https://www.nintendo.com/content/dam/noa/en_US/hardware/switch/nintendo-switch-new-package/gallery/bundle_color_console%20(3).jpg"
-        })
+            // if (fieldPrice.value) {
+            //     fieldPrice.value = 0;
+            // }
+
+            // Clear Form's state to finish the job.
+            this.setState({
+                id: null,
+                name: "",
+                price: 0,
+                imgurl: "",
+                edit: false
+            })
+        }
     }
 
     postToDB(product) {
         let { name, price, img } = this.state
-
+        console.log(product)
         axios.post('/api/product', product).then(res => {
-            this.clearInput()
-            this.props.refresh()
+            this.props.history.push('/')
         })
     }
 
     editToDB() {
-        let { id, name, price, img} =this.state
-
+        let { id, name, price, imgurl } = this.state
         let updatedProduct = {
             id: id,
             name: name,
             price: price,
-            img: img
+            img: imgurl
         }
 
+        console.log(updatedProduct.imgurl)
         axios.put('/api/product', updatedProduct).then(res => {
-            this.clearInput()
-            this.props.refreshInventory()
+            this.props.history.push('/')
         })
     }
 
-    // If the component gets updated with new props, run this code.
+    componentDidMount() {
+        let { id } = this.props.match.params;
+
+        axios.get(`/api/product/${id}`).then(product => {
+            let { id, name, price, img } = product.data[0];
+            console.log(product)
+            this.setState({
+                id: id,
+                name: name,
+                price: price,
+                imgurl: img,
+                edit: true
+            })
+
+        })
+    }
+
     componentDidUpdate(oldProps) {
-        let { id, name, price, img } = this.props.editItem
-        if (oldProps.editItem.id !== this.props.editItem.id) {
-            this.setState({ id:id, name:name, price:price, imgurl:img, edit: true})
+        if (oldProps.match.path !== this.props.match.path) {
+            this.setState({ name: "", price: 0, imgurl: "", edit: false })
         }
     }
-    
+
 
     // If there is something in editItem, render edit box. Otherwise, render new item add.
 
@@ -92,15 +112,15 @@ class Form extends Component {
         return (
             <div className="newProductBox">
                 {this.state.imgurl ?
-                <div id="displayImg" style={{ backgroundImage: `url('${this.state.imgurl}')`}}>
-                    {/* <img src={this.state.imgurl} alt="previewPicture" /> */}
-                </div> :
-                <div id="displayImg" style={{ backgroundImage: `url('${noImage})` }}>
+                    <div id="displayImg" style={{ backgroundImage: `url('${this.state.imgurl}')` }}>
+                        {/* <img src={this.state.imgurl} alt="previewPicture" /> */}
+                    </div> :
+                    <div id="displayImg" style={{ backgroundImage: `url('${noImage})` }}>
 
-                </div>}
+                    </div>}
                 <div id="newProductInput">
                     <p>Image URL:</p>
-                    <input ref="fieldURL"  value={this.state.imgurl} onChange={e => this.handleURL(e.target.value)} type="text" />
+                    <input ref="fieldURL" value={this.state.imgurl} onChange={e => this.handleURL(e.target.value)} type="text" />
                     <p>Product Name:</p>
                     <input ref="fieldName" value={this.state.name} onChange={e => this.handleName(e.target.value)} type="text" />
                     <p>Price:</p>
@@ -109,12 +129,12 @@ class Form extends Component {
                 <div id="buttons">
                     {/* Change the buttons based on whether we are adding a new product, or editting an old one. */}
                     <button className="editBoxButton" onClick={() => this.clearInput()}>Cancel</button>
-                    { this.state.edit ? <button className="editBoxButton" id="secondButton" onClick={() => this.editToDB(this.state)}>Save Changes</button> :
-                    <button className="editBoxButton" id="secondButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>}
+                    {this.state.edit ? <button className="editBoxButton" id="secondButton" onClick={() => this.editToDB(this.state)}>Save Changes</button> :
+                        <button className="editBoxButton" id="secondButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>}
                 </div>
             </div>
         )
     }
 }
 
-export default Form;
+export default withRouter(Form);

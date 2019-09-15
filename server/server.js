@@ -12,6 +12,7 @@ app.use(express.json())
 // Recieve: Nothing
 // Send: Products
 app.get('/api/inventory', ctrl.getInventory)
+app.get('/api/product/:id', ctrl.getOne)
 
 // POST /api/product
 // Recieve: req.body {name: "", price: #, img: URL}
