@@ -6,6 +6,7 @@ class Form extends Component {
         super()
 
         this.state = {
+            id: null,
             name: "",
             price: 0,
             imgurl: ""
@@ -43,6 +44,7 @@ class Form extends Component {
 
         // Clear Form's state to finish the job.
         this.setState({
+            id: null,
             name: "",
             price: 0,
             imgurl: ""
@@ -50,11 +52,40 @@ class Form extends Component {
     }
 
     postToDB(product) {
+        let { name, price, img } = this.state
+
         axios.post('/api/product', product).then(res => {
             this.clearInput()
             this.props.refreshInventory()
         })
     }
+
+    editToDB() {
+        let { id, name, price, img} =this.state
+
+        let updatedProduct = {
+            id: id,
+            name: name,
+            price: price,
+            img: img
+        }
+
+        axios.put('/api/product', updatedProduct).then(res => {
+            this.clearInput()
+            this.props.refreshInventory()
+        })
+    }
+
+    // If the component gets updated with new props, run this code.
+    componentDidUpdate(oldProps) {
+        let { id, name, price, img } = this.props.editItem
+        if (oldProps.editItem.id !== this.props.editItem.id) {
+            this.setState({ id:id, name:name, price:price, imgurl:img, edit: true})
+        }
+    }
+    
+
+    // If there is something in editItem, render edit box. Otherwise, render new item add.
 
     render() {
         return (
@@ -72,7 +103,8 @@ class Form extends Component {
                 </div>
                 <div id="buttons">
                     <button className="editBoxButton" onClick={() => this.clearInput()}>Cancel</button>
-                    <button className="editBoxButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>
+                    { this.state.edit ? <button className="editBoxButton" onClick={() => this.editToDB(this.state)}>Save Changes</button> :
+                    <button className="editBoxButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>}
                 </div>
             </div>
         )

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from './components/Header';
 import Form from './components/Form';
 import Dashboard from './components/Dashboard';
-import {HashRouter, Link} from 'react-router-dom';
+import { HashRouter, Link } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
@@ -17,23 +17,30 @@ class App extends Component {
 
     this.editProduct = this.editProduct.bind(this)
     this.getInventory = this.getInventory.bind(this)
+    this.putUpdate = this.putUpdate.bind(this)
   }
-  getInventory(){
+  getInventory() {
     axios.get('/api/inventory').then((inventory) => {
-      this.setState({inventory: inventory.data})
+      this.setState({ inventory: inventory.data })
     })
 
   }
   // Run GET as soon as APP loads.
-  componentDidMount(){
+  componentDidMount() {
     this.getInventory()
   }
-  
 
-  
-  editProduct(product){
-    this.setState({editItem:product})
+
+
+  editProduct(product) {
+    this.setState({ editItem: product })
   }
+
+  putUpdate(product) {
+    axios.put(`/api/product/`, product).then(res => {
+
+    })
+}
 
   // putProduct(product) {
   //   axios({
@@ -51,13 +58,16 @@ class App extends Component {
   // }
 
   render() {
-    {this.getInventory()}
+    { this.getInventory() }
     return (
       <div className="App">
         <Header />
         <div className="bodySection">
-        <Dashboard editProduct={this.editProduct} getInventory={this.getInventory} inventory={this.state.inventory} />
-        <Form editItem={this.editProduct} refreshInventory={() => this.getInventory()}/>
+          <Dashboard editProduct={this.editProduct} getInventory={this.getInventory} inventory={this.state.inventory} />
+
+          {/* If you invoke a function() (invokation) as a prop to another component, IT WILL RUN IMMEDIATELY */}
+          {/* If you pass in a prop,  */}
+          <Form editItem={this.state.editItem} updateItem={this.putUpdate} refreshInventory={this.getInventory} />
         </div>
       </div>
     );

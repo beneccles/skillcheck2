@@ -12,7 +12,7 @@ class Dashboard extends Component {
         const { inventory } = this.props;
         let result = inventory.map((product) => {
             return (
-                <Product key={product.id} editProduct={() => this.props.editProduct} product={product} />
+                <Product key={product.id} editProduct={this.props.editProduct} product={product} />
             )
         })
 

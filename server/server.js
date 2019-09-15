@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const massive = require('massive')
 const ctrl = require('./controllers/inventoryController')
-const {SERVER_PORT, CONNECTION_STRING} = process.env
+const { SERVER_PORT, CONNECTION_STRING } = process.env
 
 const app = express()
 
@@ -23,8 +23,9 @@ app.put('/api/product', ctrl.editProduct)
 // DELETE /api/product
 app.delete('/api/product/:id', ctrl.deleteProduct)
 
-massive(CONNECTION_STRING).then(databaseConnection => {
-    app.set('db', databaseConnection)
-    app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} on station!`))
-})
-.catch(err => console.log(err))
+massive(CONNECTION_STRING)
+    .then(databaseConnection => {
+        app.set('db', databaseConnection)
+        app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} on station!`))
+    })
+    .catch(err => console.log(err))

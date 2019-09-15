@@ -18,11 +18,10 @@ module.exports = {
     editProduct: (req, res) => {
         const db = req.app.get('db')
         const {id, name, price, img} = req.body
-        console.log(req.body)
-
-        // Pass in the ID and description to update_product, so that it can update the server.
-        db.update_product(id, name, price, img).then(result => {
-            res.status(200).send(result)
+        console.log(id)
+        // Pass in the ID  to update_product, so that it can update the server.
+        db.update_product([id, name, price, img]).then(result => {
+            res.sendStatus(200)
         }).catch(err => {
             console.log(err)
             res.status(500).send({errorMessage: 'Something Went Wrong! Our Engineers have been notified.'})

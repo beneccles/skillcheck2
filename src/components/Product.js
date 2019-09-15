@@ -49,7 +49,9 @@ export default function Product(props) {
                 <p>{`$${price}`}</p>
                 <div className="productButtons">
                     {/* <button onClick={() => this.deleteProduct(this.state.id)} id="delete">Delete</button> */}
-                    <button onClick={_ => props.editProduct(props.product)} id="edit">Edit</button>
+                    {/* onClick always looks for a callback function */}
+                    {/* Give onClick a grenade it can pull the pin out of. */}
+                    <button onClick={() => props.editProduct(props.product)} id="edit">Edit</button>
                 </div>
             </div>
         </div>
