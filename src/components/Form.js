@@ -60,8 +60,6 @@ class Form extends Component {
     }
 
     postToDB(product) {
-        let { name, price, img } = this.state
-        console.log(product)
         axios.post('/api/product', product).then(res => {
             this.props.history.push('/')
         })

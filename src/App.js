@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Header from './components/Header';
 import Form from './components/Form';
 import Dashboard from './components/Dashboard';
-import { HashRouter, Link, Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
