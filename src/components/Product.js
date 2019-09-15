@@ -43,18 +43,18 @@ export default function Product(props) {
         // This has no context within this function.
         <div className="productBox">
             <div className="productImg">
-            {img ? <img src={img} alt="product picture" height="100px"/> :
-            <img src={noimage} alt="no picture found" height="100px" width="150.13px"/>}
+            {img ? <img src={img} alt="product" height="100px"/> :
+            <img src={noimage}  alt="no image found" height="100px" width="150.13px"/>}
             
             </div>
             <div className="infoSection">
                 <p>{name}</p>
                 <p>{`$${price}`}</p>
-                <div className="productButtons">
-                    <button onClick={() => props.delete(id)} id="delete">Delete</button>
+                <div className="productEditors">
+                    <button onClick={() => props.delete(id)} className="productButtons" id="delete">Delete</button>
                     {/* onClick always looks for a callback function */}
                     {/* Give onClick a grenade it can pull the pin out of. */}
-                    <Link to={`/edit/${id}`} state={props.product}><button id="edit">Edit</button></Link>
+                    <Link to={`/edit/${id}`} state={props.product}><button className="productButtons" id="edit">Edit</button></Link>
                 </div>
             </div>
         </div>

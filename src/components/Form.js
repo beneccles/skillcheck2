@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import noImage from '../assets/noimage.jpg';
+import noimage from '../assets/noimage.jpg';
 import { withRouter } from 'react-router-dom';
 
 class Form extends Component {
@@ -83,18 +83,20 @@ class Form extends Component {
     componentDidMount() {
         let { id } = this.props.match.params;
 
-        axios.get(`/api/product/${id}`).then(product => {
-            let { id, name, price, img } = product.data[0];
-            console.log(product)
-            this.setState({
-                id: id,
-                name: name,
-                price: price,
-                imgurl: img,
-                edit: true
-            })
+        if (id) {
+            axios.get(`/api/product/${id}`).then(product => {
+                let { id, name, price, img } = product.data[0];
+                console.log(product)
+                this.setState({
+                    id: id,
+                    name: name,
+                    price: price,
+                    imgurl: img,
+                    edit: true
+                })
 
-        })
+            })
+        }
     }
 
     componentDidUpdate(oldProps) {
@@ -113,7 +115,7 @@ class Form extends Component {
                     <div id="displayImg" style={{ backgroundImage: `url('${this.state.imgurl}')` }}>
                         {/* <img src={this.state.imgurl} alt="previewPicture" /> */}
                     </div> :
-                    <div id="displayImg" style={{ backgroundImage: `url('${noImage})` }}>
+                    <div id="displayImg" style={{ backgroundImage: `url('${noimage})` }}>
 
                     </div>}
                 <div id="newProductInput">

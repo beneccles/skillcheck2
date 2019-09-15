@@ -8,8 +8,8 @@ class Header extends Component {
             <header>
                 <div className="logo">
                     <h1 id="logotext">SHELFIE</h1>
-                    <Link to='/'>Dashboard</Link>
-                    <Link to='/add'>Add Inventory</Link>
+                    <Link to='/'><button className="headerButtons" id="dash">Dashboard</button></Link>
+                    <Link to='/add'><button className="headerButtons" id="add">Add Inventory</button></Link>
                 </div>
             </header>
         )
