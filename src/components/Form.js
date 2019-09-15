@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import noimage from '../assets/noimage.jpg';
 import { withRouter } from 'react-router-dom';
 
 class Form extends Component {
@@ -74,6 +73,7 @@ class Form extends Component {
             img: imgurl
         }
         axios.put('/api/product', updatedProduct).then(res => {
+            // Upon submit, return to dashboard.
             this.props.history.push('/')
         })
     }
@@ -81,6 +81,7 @@ class Form extends Component {
     componentDidMount() {
         let { id } = this.props.match.params;
 
+        // Grab the product information based on id, and pass it to the server with axios GET.
         if (id) {
             axios.get(`/api/product/${id}`).then(product => {
                 let { id, name, price, img } = product.data[0];
@@ -97,6 +98,7 @@ class Form extends Component {
     }
 
     componentDidUpdate(oldProps) {
+        // If the path changes to add, clear the input fields.
         if (oldProps.match.path !== this.props.match.path) {
             this.setState({ name: "", price: 0, imgurl: "", edit: false })
         }

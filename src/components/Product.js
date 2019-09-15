@@ -42,7 +42,7 @@ export default function Product(props) {
         <div className="productBox">
             <div className="productImg">
             {img ? <img src={img} alt="product" height="100px"/> :
-            <img src={noimage}  alt="no image found" height="100px" width="150.13px"/>}
+            <img src={noimage}  alt="nothing found" height="100px" width="150.13px"/>}
             
             </div>
             <div className="infoSection">
