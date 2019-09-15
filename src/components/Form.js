@@ -115,7 +115,9 @@ class Form extends Component {
                     <div id="displayImg" style={{ backgroundImage: `url('${this.state.imgurl}')` }}>
                         {/* <img src={this.state.imgurl} alt="previewPicture" /> */}
                     </div> :
-                    <div id="displayImg" style={{ backgroundImage: `url('${noimage})` }}>
+                    // I was trying to load a default no image from assets however it never seemed to work properly.
+                    // Opted to just load in a img url from the net as default.
+                    <div id="displayImg" style={{ backgroundImage: `url('https://static.thenounproject.com/png/340719-200.png')` }}>
 
                     </div>}
                 <div id="newProductInput">
