@@ -56,7 +56,7 @@ class Form extends Component {
 
         axios.post('/api/product', product).then(res => {
             this.clearInput()
-            this.props.refreshInventory()
+            this.props.refresh()
         })
     }
 
@@ -90,9 +90,13 @@ class Form extends Component {
     render() {
         return (
             <div className="newProductBox">
+                {this.state.imgurl ?
+                <div id="displayImg" style={{ backgroundImage: `url('${this.state.imgurl}')`}}>
+                    {/* <img src={this.state.imgurl} alt="previewPicture" /> */}
+                </div> :
                 <div id="displayImg">
-                    <img src={this.state.imgurl} alt="previewPicture" />
-                </div>
+
+                </div>}
                 <div id="newProductInput">
                     <p>Image URL:</p>
                     <input ref="fieldURL" value={this.state.imgurl} onChange={e => this.handleURL(e.target.value)} type="text" />
@@ -102,6 +106,7 @@ class Form extends Component {
                     <input ref="fieldPrice" value={this.state.price} onChange={e => this.handlePrice(e.target.value)} type="number" />
                 </div>
                 <div id="buttons">
+                    {/* Change the buttons based on whether we are adding a new product, or editting an old one. */}
                     <button className="editBoxButton" onClick={() => this.clearInput()}>Cancel</button>
                     { this.state.edit ? <button className="editBoxButton" onClick={() => this.editToDB(this.state)}>Save Changes</button> :
                     <button className="editBoxButton" onClick={() => this.postToDB(this.state)}>Add to Inventory</button>}

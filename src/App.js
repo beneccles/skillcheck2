@@ -67,7 +67,7 @@ class App extends Component {
 
           {/* If you invoke a function() (invokation) as a prop to another component, IT WILL RUN IMMEDIATELY */}
           {/* If you pass in a prop,  */}
-          <Form editItem={this.state.editItem} updateItem={this.putUpdate} refreshInventory={this.getInventory} />
+          <Form editItem={this.state.editItem} updateItem={this.putUpdate} refresh={this.getInventory} />
         </div>
       </div>
     );
