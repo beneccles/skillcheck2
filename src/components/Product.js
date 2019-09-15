@@ -8,9 +8,7 @@ import noimage from '../assets/noimage.jpg'
 //     }
 
 //     deleteProduct(id) {
-//         console.log(id)
 //         axios.delete(`/api/product/${id}`).then(res => {
-//             console.log("deleted")
 //             this.props.refresh()
 //         })
 //     }

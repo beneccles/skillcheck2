@@ -73,8 +73,6 @@ class Form extends Component {
             price: price,
             img: imgurl
         }
-
-        console.log(updatedProduct.imgurl)
         axios.put('/api/product', updatedProduct).then(res => {
             this.props.history.push('/')
         })
@@ -86,7 +84,6 @@ class Form extends Component {
         if (id) {
             axios.get(`/api/product/${id}`).then(product => {
                 let { id, name, price, img } = product.data[0];
-                console.log(product)
                 this.setState({
                     id: id,
                     name: name,
