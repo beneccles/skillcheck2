@@ -6,8 +6,8 @@ module.exports = {
     },
     addProduct: (req, res) => {
         const db = req.app.get('db')
-        const {name, price, img} = req.body
-        db.create_product([name, price, img]).then(result => {
+        const {name, price, imgurl} = req.body
+        db.create_product([name, price, imgurl]).then(result => {
             res.sendStatus(200)
         }).catch(err => {
             // To Err is Human, to Arr is Pirate

@@ -36,6 +36,7 @@ import noimage from '../assets/noimage.jpg'
 
 export default function Product(props) {
     let {id, name, price, img} = props.product;
+    
     return (
         // Since props is defined within the function, we can drop "this."
         // This has no context within this function.

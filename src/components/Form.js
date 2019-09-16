@@ -46,6 +46,7 @@ class Form extends Component {
             // if (fieldPrice.value) {
             //     fieldPrice.value = 0;
             // }
+    
 
             // Clear Form's state to finish the job.
             this.setState({
@@ -59,6 +60,7 @@ class Form extends Component {
     }
 
     postToDB(product) {
+        // Verified image passthrough to postToDB
         axios.post('/api/product', product).then(res => {
             this.props.history.push('/')
         })
@@ -72,6 +74,8 @@ class Form extends Component {
             price: price,
             img: imgurl
         }
+
+        console.log(updatedProduct.img)
         axios.put('/api/product', updatedProduct).then(res => {
             // Upon submit, return to dashboard.
             this.props.history.push('/')
